@@ -24,6 +24,7 @@ public class StringCalculatorCLI {
         PrintStream out = new PrintStream(outputStream);
 
         //TODO print welcome message
+        out.println("Welcome!");
 
         StringCalculator calculator = new StringCalculator();
         // Loop until the user inputs "exit"
@@ -33,13 +34,19 @@ public class StringCalculatorCLI {
             // Check if the user wants to exit
             if ("exit".equalsIgnoreCase(input)) {
                 break; // Exit the loop
+            } else if (input.contains("scalc '")) {
+                if(input.contains("//")) {
+                    input += scanner.nextLine();
+                }
+                input = input.substring(7);
+                input = input.substring(0, input.length() - 1);
             }
 
             // Process the input
             //TODO Handle "scalc"-formatted string
             var result = calculator.add(input);
 
-            out.println(result);
+            out.println("The result is " + result);
         }
 
         scanner.close();
