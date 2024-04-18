@@ -92,4 +92,31 @@ public class StringCalculatorCLITests {
         assertTrue(outputStream.toString().contains("The result is 7"));
     }
 
+    @Test
+    public void testComplexInput() {
+        String input = "scalc '//[***][%%%]\n1***2%%%4'\nexit";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        OutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        StringCalculatorCLI calculator = new StringCalculatorCLI();
+        calculator.run();
+
+        assertTrue(outputStream.toString().contains("The result is 7"));
+    }
+
+    @Test
+    public void testEvenMoreComplexInput() {
+        String input = "scalc '//[***][%%%][!!!][&&&][i]\n1***2%%%4!!!2&&&1i3'\nexit";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+        OutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        StringCalculatorCLI calculator = new StringCalculatorCLI();
+        calculator.run();
+
+        assertTrue(outputStream.toString().contains("The result is 13"));
+    }
 }
